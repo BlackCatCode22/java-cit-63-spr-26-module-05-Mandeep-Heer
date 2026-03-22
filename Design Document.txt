@@ -1,0 +1,21 @@
+﻿1. Classes
+* Animal: (age, sex, species, color, weight, origin, arrivalDate, name, uniqueID, birthDate)
+   * Getters and setters for the properties, plus the genBirthDay() and genUniqueID() methods.
+* Animal Subclasses (Hyena, Lion, Tiger, Bear):
+   * extend the Animal class.
+   * static counter in each subclass to track how many of that species have been created.
+* ZooManager (Main Application Class):
+   * reading from the arrivingAnimals.txt and animalNames.txt, and writing it to the zooPopulation.txt report.
+2. Data Structures
+* Animal Names: HashMap<String, ArrayList<String>>
+* Handling the Zoo Population (Habitats): HashMap<String, ArrayList<Animal>>
+3. Interactions
+1. The ZooManager opens animalNames.txt, reads the text, and loads the names into the HashMap.
+2. Opens arrivingAnimals.txt and loops through it line by line.
+3. The string is parsed (split by commas/spaces) to extract the raw data (age, sex, species, color, etc.).
+4. Calculates the birthday using genBirthDay() and formats it to ISO 8601 (YYYY-MM-DD).
+5. Pulls and removes an unused name from the names data structure.
+6. A new animal object is created ex: new Hyena()
+7. Inside the constructor, genUniqueID() is called, which increments the static numOfHyenas counter and assigns the correct ID string.
+8. The newly created animal object is added to the correct habitat in ArrayList.
+9. Once the file is fully read and analyzed, the program processes that data and writes it to zooPopulation.txt.
