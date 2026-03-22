@@ -1,0 +1,37 @@
+// Old Code
+ArrayList<String> availableNames = new ArrayList<>();
+while (namesScanner.hasNextLine()) {
+    String nameLine = namesScanner.nextLine();
+    if (!nameLine.trim().isEmpty()) {
+        availableNames.add(nameLine.trim());
+    }
+}
+
+//Improved Code
+HashMap<String, ArrayList<String>> speciesNames = new HashMap<>();
+
+try {
+    File namesFile = new File("src/Zoo/animalNames.txt");
+    Scanner namesScanner = new Scanner(namesFile);
+    
+    String currentSpecies = ""; // Keep track of which species we are reading names for
+    
+    while (namesScanner.hasNextLine()) {
+        String line = namesScanner.nextLine().trim();
+        
+        if (line.isEmpty()) continue;
+        
+        // If the line contains "Names:", it's a header. Extract the species name.
+        if (line.contains("Names:")) {
+            currentSpecies = line.replace(" Names:", "").toLowerCase();
+            speciesNames.put(currentSpecies, new ArrayList<>());
+        } 
+        // Otherwise, it's a list of names. Split them by comma and add to the map.
+        else {
+            String[] namesArray = line.split(", ");
+            for (String name : namesArray) {
+                speciesNames.get(currentSpecies).add(name);
+            }
+        }
+    }
+    namesScanner.close();
